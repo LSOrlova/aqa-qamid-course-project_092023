@@ -2,6 +2,8 @@ package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -24,23 +26,25 @@ public class CreditPage {
     }
 
     public void fillData(Card card) {
-        cardNumberField.setValue(card.getNumber());
-        monthField.setValue(card.getMonth());
-        yearField.setValue(card.getYear());
-        ownerField.setValue(card.getHolder());
-        cvcField.setValue(card.getCvc());
+        cardNumber.setValue(card.getNumber());
+        month.setValue(card.getMonth());
+        year.setValue(card.getYear());
+        owner.setValue(card.getHolder());
+        cvc.setValue(card.getCvc());
         continueButton.click();
     }
 
     public void notificationOkIsVisible() {
-        notificationOK.waitUntil(visible, 15000);
+        notificationOK.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public void notificationErrorIsVisible() {
-        notificationError.waitUntil(visible, 15000);
+
+        notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public boolean inputInvalidIsVisible() {
+
         return inputInvalid.isDisplayed();
     }
 
