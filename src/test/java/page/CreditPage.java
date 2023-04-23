@@ -1,6 +1,7 @@
-package ru.netology.page;
+package page;
 
 import com.codeborne.selenide.SelenideElement;
+import data.Card;
 
 import java.time.Duration;
 
@@ -11,11 +12,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class CreditPage {
     private SelenideElement heading = $$("h3").find(text("Кредит по данным карты"));
-    private SelenideElement cardNumber = $(byText("Номер карты")).parent().$(".input__control");
-    private SelenideElement month = $(byText("Месяц")).parent().$(".input__control");
-    private SelenideElement year = $(byText("Год")).parent().$(".input__control");
-    private SelenideElement owner = $(byText("Владелец")).parent().$(".input__control");
-    private SelenideElement cvc = $(byText("CVC/CVV")).parent().$(".input__control");
+    private SelenideElement cardNumberField = $(byText("Номер карты")).parent().$(".input__control");
+    private SelenideElement monthField = $(byText("Месяц")).parent().$(".input__control");
+    private SelenideElement yearField = $(byText("Год")).parent().$(".input__control");
+    private SelenideElement ownerField = $(byText("Владелец")).parent().$(".input__control");
+    private SelenideElement cvcField = $(byText("CVC/CVV")).parent().$(".input__control");
     private SelenideElement continueButton = $$("button").find(exactText("Продолжить"));
     private SelenideElement notificationOK = $(".notification_status_ok");
     private SelenideElement notificationError = $(".notification_status_error");
@@ -26,11 +27,11 @@ public class CreditPage {
     }
 
     public void fillData(Card card) {
-        cardNumber.setValue(card.getNumber());
-        month.setValue(card.getMonth());
-        year.setValue(card.getYear());
-        owner.setValue(card.getHolder());
-        cvc.setValue(card.getCvc());
+        cardNumberField.setValue(card.getNumber());
+        monthField.setValue(card.getMonth());
+        yearField.setValue(card.getYear());
+        ownerField.setValue(card.getHolder());
+        cvcField.setValue(card.getCvc());
         continueButton.click();
     }
 
