@@ -33,7 +33,7 @@ public class ShopTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/valuesPayment.cvs", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/values.cvs", numLinesToSkip = 1)
     @DisplayName("Should show warning pop up during fill in form")
     void shouldShowWarningIfValueIsIncorrectForPayment(String number, String month, String year, String owner, String cvc, String message) {
         Card incorrectValuesCard = new Card(number, month, year, owner, cvc);
