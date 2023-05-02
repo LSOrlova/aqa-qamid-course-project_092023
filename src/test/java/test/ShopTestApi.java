@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ShopTestApi {
     Card invalidHolderCard = DataGenerator.getInvalidHolderCard();
+
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());

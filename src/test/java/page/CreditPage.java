@@ -44,9 +44,7 @@ public class CreditPage {
         notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public boolean inputInvalidIsVisible() {
-
+    public boolean inputInvalidIsVisible(String warning) {
         return inputInvalid.isDisplayed();
     }
-
 }

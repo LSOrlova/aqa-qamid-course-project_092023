@@ -23,9 +23,11 @@ public class PaymentPage {
     private SelenideElement notificationOK = $(".notification_status_ok");
     private SelenideElement notificationError = $(".notification_status_error");
     private SelenideElement inputInvalid = $(".input__sub");
+
     public PaymentPage() {
         heading.shouldBe(visible);
     }
+
     public void inputData(Card card) {
         cardNumberField.setValue(card.getNumber());
         monthField.setValue(card.getMonth());
@@ -43,9 +45,9 @@ public class PaymentPage {
         notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public boolean inputInvalidIsVisible() {
+    public boolean inputInvalidIsVisible(String warning) {
         return inputInvalid.isDisplayed();
     }
-    }
+}
 
 
