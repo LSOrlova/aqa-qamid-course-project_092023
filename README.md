@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/x5wodcf63dovqq33?svg=true)](https://ci.appveyor.com/project/LSOrlova/aqa-qamid-course-project)
+
 # aqa_qamid_course_project Курсовой проект AQ-51
 #### Документы
  - [План тестирования](https://github.com/LSOrlova/aqa_qamid_course_project/blob/main/docs/plan.md)
