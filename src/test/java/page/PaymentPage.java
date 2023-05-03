@@ -22,7 +22,9 @@ public class PaymentPage {
     private SelenideElement continueButton = $$("button").find(exactText("Продолжить"));
     private SelenideElement notificationOK = $(".notification_status_ok");
     private SelenideElement notificationError = $(".notification_status_error");
-    private SelenideElement inputInvalid = $(".input__sub");
+    private SelenideElement inputInvalidExpirationDateMoreThan5Years = $$(".input__sub").find(exactText("Неверно указан срок действия карты"));
+    private SelenideElement inputInvalidExpirationDate = $$(".input__sub").find(exactText("Истёк срок действия карты"));
+    private SelenideElement inputInvalid = $$(".input__sub").find((exactText("Неверный формат")));
 
     public PaymentPage() {
         heading.shouldBe(visible);
@@ -45,8 +47,16 @@ public class PaymentPage {
         notificationError.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public boolean inputInvalidIsVisible(String warning) {
-        return inputInvalid.isDisplayed();
+    public void inputInvalidIsVisibleMore5Years() {
+        inputInvalidExpirationDateMoreThan5Years.shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    public void inputInvalidIsVisibleExpiredDate() {
+        inputInvalidExpirationDate.shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    public void inputInvalidIsVisible() {
+        inputInvalid.shouldBe(visible, Duration.ofSeconds(15));
     }
 }
 

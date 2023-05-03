@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class ShopTestApi {
+public class ShopAPITest {
     Card invalidHolderCard = DataGenerator.getInvalidHolderCard();
 
     @BeforeAll
@@ -25,12 +25,14 @@ public class ShopTestApi {
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
     }
+
     @Test
     @DisplayName("Should send payment request with approved card")
     void shouldSendPaymentRequestWithApprovedCard() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getApprovedCard(), "/api/v1/pay");
         assertEquals(200, statusCode);
     }
+
     @Test
     @DisplayName("Shouldn't send payment request with declined card")
     void shouldNotSendPaymentWithDeclinedCard() {

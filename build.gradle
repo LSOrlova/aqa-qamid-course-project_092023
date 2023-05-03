@@ -33,6 +33,10 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-selenide:2.21.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
+    testImplementation 'mysql:mysql-connector-java:8.0.32'
+    testImplementation 'postgresql:postgresql:9.3-1102.jdbc41'
+    testImplementation 'commons-dbutils:commons-dbutils:1.7'
+
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 
@@ -46,4 +50,7 @@ dependencies {
 test {
     useJUnitPlatform()
     systemProperty 'sut.url', System.getProperty('sut.url', "http://localhost:8080/")
-}
+    systemProperty 'db.url', System.getProperty('db.url')
+    systemProperty 'db.user', System.getProperty('db.user', "app")
+    systemProperty 'db.password', System.getProperty('db.password', "pass")
+    }

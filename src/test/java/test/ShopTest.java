@@ -31,65 +31,133 @@ public class ShopTest {
         SelenideLogger.removeListener("allure");
     }
 
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/values.cvs", numLinesToSkip = 1)
-//    @DisplayName("Should show warning pop up during fill in payment form")
-//    void shouldShowWarningIfValueIsIncorrectForPayment(String number, String month, String year, String owner, String cvc, String message) {
-//        Card incorrectValuesCard = new Card(number, month, year, owner, cvc);
-//        HomePage startPage = new HomePage();
-//        PaymentPage paymentPage = startPage.goToPaymentPage();
-//        paymentPage.inputData(incorrectValuesCard);
-//        assertTrue(paymentPage.inputInvalidIsVisible(), message);
-//    }
+    @Test
+    @DisplayName("Happy path. Should send request by approved card, payment page")
+    void shouldSendRequestSuccessForPayment() {
+        Card expiredCard = DataGenerator.getApprovedCard();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(expiredCard);
+        paymentPage.notificationOkIsVisible();
+    }
 
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/values.cvs", numLinesToSkip = 1)
-//    @DisplayName("Should show warning pop up during fill in credit form")
-//    void shouldShowWarningIfValueIsIncorrectForCredit(String number, String month, String year, String owner, String cvc, String message) {
-//        Card incorrectValuesCard = new Card(number, month, year, owner, cvc);
-//        HomePage startPage = new HomePage();
-//        CreditPage creditPage = startPage.goToCreditPage();
-//        creditPage.fillData(incorrectValuesCard);
-//        assertTrue(creditPage.inputInvalidIsVisible("Истёк срок действия карты"), message);
-//    }
+    @Test
+    @DisplayName("Should not send request by declined card, payment page")
+    void shouldNotSendRequestDeclinedCardForPayment() {
+        Card expiredCard = DataGenerator.getDeclinedCard();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(expiredCard);
+        paymentPage.notificationErrorIsVisible();
+    }
+
+    @Test
+    @DisplayName("Should not send request by random card, payment page")
+    void shouldNotSendRequestWithWrongCardNumberForPayment() {
+        Card wrongRandomCardNumber = DataGenerator.getWrongRandomCardNumber();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(wrongRandomCardNumber);
+        paymentPage.inputInvalidIsVisible();
+    }
 
     @Test
     @DisplayName("Should show warning if card expired, payment page")
     void shouldShowWarningIfCardIsExpiredForPayment() {
-        Card expiredCard = DataGenerator.getInvalidExpDateCard();
+        Card invalidExpDateCard = DataGenerator.getInvalidExpDateCard();
         HomePage startPage = new HomePage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
-        paymentPage.inputData(expiredCard);
-        assertTrue(paymentPage.inputInvalidIsVisible("Истёк срок действия карты"), "Should show warning if card expired, payment page");
-    }
-
-    @Test
-    @DisplayName("Should show warning if card expired, credit page")
-    void shouldShowWarningIfCardIsExpiredForCredit() {
-        Card expiredCard = DataGenerator.getInvalidExpDateCard();
-        HomePage startPage = new HomePage();
-        CreditPage creditPage = startPage.goToCreditPage();
-        creditPage.fillData(expiredCard);
-        assertTrue(creditPage.inputInvalidIsVisible("Истёк срок действия карты"), "Should show warning if card expired, credit page");
+        paymentPage.inputData(invalidExpDateCard);
+        paymentPage.inputInvalidIsVisibleExpiredDate();
     }
 
     @Test
     @DisplayName("Should show warning if expiration date more than 5 years, payment page")
     void shouldShowWarningIfExpirationDateMoreThan5YearsForPayment() {
-        Card invalidExpDateCard = DataGenerator.getInvalidExpDateCard();
+        Card invalidExpDateCard = DataGenerator.getInvalidExpDateCardMoreThan5Years();
         HomePage startPage = new HomePage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
         paymentPage.inputData(invalidExpDateCard);
-        assertTrue(paymentPage.inputInvalidIsVisible("Неверно указан срок действия карты"), "Should show warning if expiration date more than 5 years, payment page");
+        paymentPage.inputInvalidIsVisibleMore5Years();
     }
 
     @Test
-    @DisplayName("Should show warning if expiration date more than 5 years, credit page")
-    void shouldShowWarningIfExpirationDateMoreThan5YearsForCredit() {
-        Card invalidExpDateCard = DataGenerator.getInvalidExpDateCard();
+    @DisplayName("Should show warning if month 00, payment page")
+    void shouldShowWarningIfMonth00ForPayment() {
+        Card invalidMonthCard = DataGenerator.getInvalidMonth00();
         HomePage startPage = new HomePage();
-        CreditPage creditPage = startPage.goToCreditPage();
-        creditPage.fillData(invalidExpDateCard);
-        assertTrue(creditPage.inputInvalidIsVisible("Неверно указан срок действия карты"), "Should show warning if expiration date more than 5 years, credit page");
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(invalidMonthCard);
+        paymentPage.inputInvalidIsVisible();
     }
+
+    @Test
+    @DisplayName("Should show warning if month expired, payment page")
+    void shouldShowWarningIfMonthExpiredForPayment() {
+        Card invalidExpiredMonthCard = DataGenerator.getExpiredMonth();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(invalidExpiredMonthCard);
+        paymentPage.inputInvalidIsVisibleExpiredDate();
+    }
+
+    @Test
+    @DisplayName("Should show warning if year 1 number, payment page")
+    void shouldShowWarningIfYear1numberForPayment() {
+        Card invalidYear1number = DataGenerator.getInvalidYear1number();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(invalidYear1number);
+        paymentPage.inputInvalidIsVisible();
+    }
+
+    @Test
+    @DisplayName("Should show warning if CVV 1 number, payment page")
+    void shouldShowWarningIfCVV1numberForPayment() {
+        Card invalidCVV1number = DataGenerator.getInvalidCVV1number();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(invalidCVV1number);
+        paymentPage.inputInvalidIsVisible();
+    }
+
+    @Test
+    @DisplayName("Should show warning if CVV 2 number, payment page")
+    void shouldShowWarningIfCVV2numberForPayment() {
+        Card invalidCVV2numbers = DataGenerator.getInvalidCVV2numbers();
+        HomePage startPage = new HomePage();
+        PaymentPage paymentPage = startPage.goToPaymentPage();
+        paymentPage.inputData(invalidCVV2numbers);
+        paymentPage.inputInvalidIsVisible();
+    }
+
+//    @Test
+//    @DisplayName("Happy path, credit page")
+//    void shouldSendRequestSuccessForCredit() {
+//        Card expiredCard = DataGenerator.getApprovedCard();
+//        HomePage startPage = new HomePage();
+//        CreditPage creditPage = startPage.goToCreditPage();
+//        creditPage.fillData(expiredCard);
+//        creditPage.notificationOkIsVisible();
+//    }
+//
+//    @Test
+//    @DisplayName("Should show warning if card expired, credit page")
+//    void shouldShowWarningIfCardIsExpiredForCredit() {
+//        Card expiredCard = DataGenerator.getInvalidExpDateCard();
+//        HomePage startPage = new HomePage();
+//        CreditPage creditPage = startPage.goToCreditPage();
+//        creditPage.fillData(expiredCard);
+//        assertTrue(creditPage.inputInvalidIsVisible("Истёк срок действия карты"), "Should show warning if card expired, credit page");
+//    }
+//
+//    @Test
+//    @DisplayName("Should show warning if expiration date more than 5 years, credit page")
+//    void shouldShowWarningIfExpirationDateMoreThan5YearsForCredit() {
+//        Card invalidExpDateCard = DataGenerator.getInvalidExpDateCard();
+//        HomePage startPage = new HomePage();
+//        CreditPage creditPage = startPage.goToCreditPage();
+//        creditPage.fillData(invalidExpDateCard);
+//        assertTrue(creditPage.inputInvalidIsVisible("Неверно указан срок действия карты"), "Should show warning if expiration date more than 5 years, credit page");
+//    }
 }
