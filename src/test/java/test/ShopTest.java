@@ -6,8 +6,6 @@ import data.DataGenerator;
 import data.DbUtils;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import page.CreditPage;
 import page.HomePage;
 import page.PaymentPage;

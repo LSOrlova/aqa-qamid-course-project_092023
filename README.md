@@ -1,4 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/x5wodcf63dovqq33?svg=true)](https://ci.appveyor.com/project/LSOrlova/aqa-qamid-course-project)
 
 # aqa_qamid_course_project Курсовой проект AQ-51
 #### Документы
@@ -48,7 +47,7 @@
 
    - для запуска под PostgreSQL использовать команду 
     
-   ```gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test```
+   ```.\gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test```
 
 *По умолчанию тесты запускаются для "http://localhost:8080/", чтобы изменить адрес, необходимо дополнительно указать -Dsut.url=...
 *Чтобы использовать для подключения к БД логин и пароль отличные от указанных по умолчанию, необходимо дополнительно указать -Ddb.user=... и -Ddb.password=...
