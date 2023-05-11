@@ -69,7 +69,7 @@ public class DbUtils {
                 )
         ) {
             data = runner.query(conn, query, new ScalarHandler<>());
-                    } catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return data;

@@ -32,22 +32,22 @@
  3. запуск приложения:
    - для запуска под MySQL использовать команду
  
- ```java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar```
+ ```java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar aqa-shop.jar```
  
    - для запуска под PostgreSQL использовать команду 
    
-   ```java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar aqa-shop.jar```
+   ```java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar aqa-shop.jar```
    
 
 4. запуск тестов (Allure):
   - для запуска под MySQL использовать команду 
    
-   ```gradlew -Ddb.url=jdbc:mysql://localhost:3306/app clean test```
+   ```.\gradlew "-Ddb.url=jdbc:mysql://localhost:3306/app" clean test```
    
 
    - для запуска под PostgreSQL использовать команду 
     
-   ```.\gradlew -Ddb.url=jdbc:postgresql://localhost:5432/app clean test```
+   ```.\gradlew "-Ddb.url=jdbc:postgresql://localhost:5432/app" clean test```
 
 *По умолчанию тесты запускаются для "http://localhost:8080/", чтобы изменить адрес, необходимо дополнительно указать -Dsut.url=...
 *Чтобы использовать для подключения к БД логин и пароль отличные от указанных по умолчанию, необходимо дополнительно указать -Ddb.user=... и -Ddb.password=...
