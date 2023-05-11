@@ -4,9 +4,6 @@ services:
     image: postgres:12.0-alpine
     ports:
       - '5432:5432'
-    volumes:
-      - ./data_postgres:/var/lib/postgres
-
     environment:
       - POSTGRES_PASSWORD=pass
       - POSTGRES_USER=app
@@ -16,8 +13,6 @@ services:
     image: mysql:8.0.18
     ports:
       - '3306:3306'
-    volumes:
-      - ./data_mysql:/var/lib/mysql
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=app

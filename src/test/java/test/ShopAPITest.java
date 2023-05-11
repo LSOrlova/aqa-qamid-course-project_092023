@@ -31,7 +31,7 @@ public class ShopAPITest {
 
     @Test
     @DisplayName("Should send payment request with approved card")
-    void shouldSendPaymentRequestWithApprovedCard() throws SQLException {
+    void shouldSendPaymentRequestWithApprovedCard() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getApprovedCard(), "/api/v1/pay");
         assertEquals(200, statusCode);
         assertEquals("APPROVED", DbUtils.findPaymentStatus());
@@ -39,15 +39,16 @@ public class ShopAPITest {
 
     @Test
     @DisplayName("Shouldn't send payment request with declined card")
-    void shouldNotSendPaymentWithDeclinedCard() throws SQLException {
+    void shouldNotSendPaymentWithDeclinedCard() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getDeclinedCard(), "/api/v1/pay");
-        assertEquals(500, statusCode);
+        assertEquals(400, statusCode);
         assertEquals("DECLINED", DbUtils.findPaymentStatus());
     }
 
     @Test
     @DisplayName("Shouldn't send payment request with random card")
-    void shouldNotSendPaymentRequestWithIncorrectName() throws SQLException {
+    void shouldNotSendPaymentRequestWithIncorrectName() {
+        DbUtils.clearTables();
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getFakeCard(), "/api/v1/pay");
         assertNotEquals(200, statusCode);
         assertEquals("0", DbUtils.countRecords());
@@ -55,7 +56,7 @@ public class ShopAPITest {
 
     @Test
     @DisplayName("Should send credit request with approved card")
-    void shouldSendCreditRequestWithApprovedCard() throws SQLException {
+    void shouldSendCreditRequestWithApprovedCard() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getApprovedCard(), "/api/v1/credit");
         assertEquals(200, statusCode);
         assertEquals("APPROVED", DbUtils.findCreditStatus());
@@ -63,15 +64,16 @@ public class ShopAPITest {
 
     @Test
     @DisplayName("Shouldn't send credit request with declined card")
-    void shouldNotSendCreditWithDeclinedCard() throws SQLException {
+    void shouldNotSendCreditWithDeclinedCard() {
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getDeclinedCard(), "/api/v1/credit");
-        assertEquals(500, statusCode);
+        assertEquals(400, statusCode);
         assertEquals("DECLINED", DbUtils.findCreditStatus());
     }
 
     @Test
     @DisplayName("Shouldn't send credit request with random card")
-    void shouldNotSendCreditRequestWithIncorrectName() throws SQLException {
+    void shouldNotSendCreditRequestWithIncorrectName() {
+        DbUtils.clearTables();
         int statusCode = ApiUtils.getRequestStatusCode(DataGenerator.getFakeCard(), "/api/v1/credit");
         assertNotEquals(200, statusCode);
         assertEquals("0", DbUtils.countRecords());

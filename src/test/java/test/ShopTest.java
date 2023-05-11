@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShopTest {
     @BeforeEach
-    public void openPage() throws SQLException {
+    public void openPage() {
         DbUtils.clearTables();
         String url = System.getProperty("sut.url");
         open(url);
@@ -37,7 +37,7 @@ public class ShopTest {
     // PAYMENT PAGE
     @Test
     @DisplayName("Happy path. Should send request by approved card, payment page")
-    void shouldSendRequestSuccessForPayment() throws SQLException {
+    void shouldSendRequestSuccessForPayment() {
         Card approvedCard = DataGenerator.getApprovedCard();
         HomePage startPage = new HomePage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -48,7 +48,7 @@ public class ShopTest {
 
     @Test
     @DisplayName("Should not send request by declined card, payment page")
-    void shouldNotSendRequestDeclinedCardForPayment() throws SQLException {
+    void shouldNotSendRequestDeclinedCardForPayment() {
         Card declinedCard = DataGenerator.getDeclinedCard();
         HomePage startPage = new HomePage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -59,7 +59,8 @@ public class ShopTest {
 
     @Test
     @DisplayName("Should not send request by random card, payment page")
-    void shouldNotSendRequestWithWrongCardNumberForPayment() throws SQLException {
+    void shouldNotSendRequestWithWrongCardNumberForPayment() {
+        DbUtils.clearTables();
         Card wrongRandomCardNumber = DataGenerator.getWrongRandomCardNumber();
         HomePage startPage = new HomePage();
         PaymentPage paymentPage = startPage.goToPaymentPage();
@@ -141,7 +142,7 @@ public class ShopTest {
     // CREDIT PAGE
     @Test
     @DisplayName("Happy path. Should send request by approved card, credit page")
-    void shouldSendRequestSuccessForCredit() throws SQLException {
+    void shouldSendRequestSuccessForCredit() {
         Card approvedCard = DataGenerator.getApprovedCard();
         HomePage homePage = new HomePage();
         CreditPage creditPage = homePage.goToCreditPage();
@@ -152,7 +153,7 @@ public class ShopTest {
 
     @Test
     @DisplayName("Should not send request by declined card, credit page")
-    void shouldNotSendRequestDeclinedCardForCredit() throws SQLException {
+    void shouldNotSendRequestDeclinedCardForCredit() {
         Card declinedCard = DataGenerator.getDeclinedCard();
         HomePage homePage = new HomePage();
         CreditPage creditPage = homePage.goToCreditPage();
@@ -163,7 +164,8 @@ public class ShopTest {
 
     @Test
     @DisplayName("Should not send request by random card, credit page")
-    void shouldNotSendRequestWithWrongCardNumberForCredit() throws SQLException {
+    void shouldNotSendRequestWithWrongCardNumberForCredit() {
+        DbUtils.clearTables();
         Card wrongRandomCardNumber = DataGenerator.getWrongRandomCardNumber();
         HomePage homePage = new HomePage();
         CreditPage creditPage = homePage.goToCreditPage();
@@ -204,7 +206,7 @@ public class ShopTest {
 
     @Test
     @DisplayName("Should show warning if month expired, credit page")
-    void shouldShowWarningIfMonthExpiredForCreditt() {
+    void shouldShowWarningIfMonthExpiredForCredit() {
         Card invalidExpiredMonthCard = DataGenerator.getExpiredMonth();
         HomePage homePage = new HomePage();
         CreditPage creditPage = homePage.goToCreditPage();
