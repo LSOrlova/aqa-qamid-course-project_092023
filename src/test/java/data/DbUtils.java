@@ -34,12 +34,12 @@ public class DbUtils {
     }
 
     public static String findPaymentStatus() {
-        val statusSQL = "SELECT status FROM payment_entity ORDER BY created DESK LIMIT 1;";
+        val statusSQL = "SELECT status FROM payment_entity WHERE created = (SELECT max(created) FROM payment_entity);";
         return getData(statusSQL);
     }
 
     public static String findCreditStatus() {
-        val statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESK LIMIT 1;";
+        val statusSQL = "SELECT status FROM credit_request_entity WHERE created = (SELECT max(created) FROM credit_request_entity);";
         return getData(statusSQL);
     }
 

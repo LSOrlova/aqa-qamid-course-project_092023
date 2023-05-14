@@ -95,6 +95,6 @@ public class DataGenerator {
     }
 
     public static Card getExpiredMonth() {
-        return new Card(generateRandomCardNumber(), generateMonth(-1), generateYear(5), generateName(), generateCVC());
+        return new Card(generateRandomCardNumber(), generateMonth(-1), generateYear(0), generateName(), generateCVC());
     }
 }
