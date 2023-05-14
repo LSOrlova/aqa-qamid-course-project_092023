@@ -1,9 +1,9 @@
 
 # aqa_qamid_course_project Курсовой проект AQ-51
 #### Документы
- - [План тестирования](https://github.com/LSOrlova/aqa_qamid_course_project/blob/main/docs/plan.md)
- - [Отчет по итогам тестирования](https://github.com/LSOrlova/aqa_qamid_course_project/blob/main/docs/Report.md)
- - [Отчет по итогам автоматизации](https://github.com/LSOrlova/aqa_qamid_course_project/blob/main/docs/Summary.md)
+ - [План тестирования](https://github.com/LSOrlova/aqa-qamid-course-project_092023/blob/main/docs/plan.md)
+ - [Отчет по итогам тестирования](https://github.com/LSOrlova/aqa-qamid-course-project_092023/blob/main/docs/Report.md)
+ - [Отчет по итогам автоматизации](https://github.com/LSOrlova/aqa-qamid-course-project_092023/blob/main/docs/Summary.md)
  
 #### Описание приложения
 Приложение представляет из себя веб-сервис "Путешествие дня".
